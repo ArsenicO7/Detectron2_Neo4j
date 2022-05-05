@@ -37,7 +37,7 @@ class Detector:
 
         self.predictor = DefaultPredictor(self.cfg)
         
-    def onImage(self, imagePath):
+    def onImage(self, imagePath, frameNum):
         image = cv2.imread(imagePath)
         predictions = self.predictor(image)
 
@@ -73,15 +73,13 @@ class Detector:
 
         #sample data for JSON file for one frame and the instances. Would put in for loop
         data = {
-            'instance' : [
-                {
-                    'box/location' : boxes,
-                    'classification' : classification
-                }
-            ]
+            "frame_number": frameNum,
+            "obj_number": len(predictions["instances"]),
+            "objects" : classification,
+            "box" : boxes
         }
 
-        with open('new_file.json', 'w') as f:
+        with open('{}.json'.format(frameNum), 'w') as f:
             json.dump(data, f, indent=2)
             print("New json file is created from data.json file")
 

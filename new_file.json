@@ -1,8 +1,0 @@
-{
-  "instance": [
-    {
-      "box/location": "Boxes(tensor([[199.1371,  91.9056, 255.5997, 135.4072]]))",
-      "classification": "chair"
-    }
-  ]
-}
